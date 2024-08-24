@@ -1,0 +1,1164 @@
+/* Google fonts import link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Additional styles for other elements */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.clock-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px; /* Moves the clock container 20px to the right */
+}
+
+/* Pin Styling */
+.pin {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(122, 22, 236); /* Deep blue background */
+  border: 3px solid #f1ce08e7;
+  border-radius: 10%;
+  margin: auto;
+  z-index: 1000;
+  box-shadow: 0 6px 12px rgba(0, 247, 214, 0.63); /* Elegant shadow for depth */
+}
+
+.clock {
+  width: 25rem; /* Decrease width */
+  height: 25rem; /* Decrease height */
+  margin-top: 3rem; /* Add margin to move it downward */
+  position: relative;
+  padding: 1rem; /* Adjust padding if needed */
+  border: 5px solid #020202; /* Adjust border width */
+  box-shadow: 
+    -4px -4px 10px rgba(67,67,67,0.5), /* Outer shadow */
+    inset 4px 4px 10px rgba(252, 1, 1, 0.5), /* Inner red shadow */
+    inset -4px -4px 10px rgba(67,67,67,0.5), /* Inner shadow */
+    4px 4px 10px rgba(185, 0, 241, 0.3), /* Outer glow */
+    inset 0 0 0 2px white; /* Thin white inner border */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Ensure that clock hands are positioned relative to this container */
+  animation: glowing 2s ease-in-out infinite; /* Animation for glowing effect */
+}
+
+/* Keyframes for glowing animation */
+@keyframes glowing {
+  0% {
+    box-shadow: 
+      0 0 15px rgba(255, 0, 0, 0.7), 
+      inset 0 0 10px rgba(255, 215, 0, 0.5),
+      inset 0 0 20px rgba(255, 0, 0, 0.3),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 0, 1), 
+      inset 0 0 20px rgba(255, 215, 0, 0.8),
+      inset 0 0 30px rgba(255, 0, 0, 0.5),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+  100% {
+    box-shadow: 
+      0 0 15px rgba(255, 0, 0, 0.7), 
+      inset 0 0 10px rgba(255, 215, 0, 0.5),
+      inset 0 0 20px rgba(255, 0, 0, 0.3),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+}
+
+.outer-clock-face {
+  position: relative;
+  background: #282828;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  z-index: 1; /* Make sure it's beneath the hands */
+}
+
+.outer-clock-face::after {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.outer-clock-face::after,
+.outer-clock-face::before,
+.outer-clock-face .marking {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background: #1df52f;
+  z-index: 0; /* Ensure markings are beneath hands */
+  left: 49%;
+}
+
+.outer-clock-face .marking {
+  background: #bdbdcb;
+  width: 3px;
+}
+
+.outer-clock-face .marking.marking-one {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.outer-clock-face .marking.marking-two {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.outer-clock-face .marking.marking-three {
+  -webkit-transform: rotate(120deg);
+  -moz-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.outer-clock-face .marking.marking-four {
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+
+.inner-clock-face {
+  position: absolute;
+  top: 10%; /* Positioning the inner clock face slightly down */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  width: 80%;
+  height: 80%;
+  background: #282828;
+  border-radius: 50%;
+  z-index: 2; /* Above outer clock face */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px; /* Space between boxes */
+  animation: pulse 3s ease-in-out infinite; /* Pulsating animation */
+}
+
+/* Keyframes for pulsating animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0.3); /* Initial state without glow */
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Midpoint with glowing effect */
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0.3); /* Back to initial state */
+  }
+}
+
+
+
+/* Light Mode specific styles */
+
+/* Light Mode Styles */
+body.light-mode {
+  background-color: #f0f0f0; /* Light gray for the body background */
+  color: #333333; /* Dark gray text for contrast */
+}
+
+/* Full Screen Background */
+.light-mode {
+  background-color: #001f3f; /* Deep midnight blue for the full screen */
+  transition: background-color 1.5s ease; /* Smooth transition for background color change */
+}
+
+/* Clock Styles */
+.light-mode .clock {
+  width: 25rem; /* Decrease width */
+  height: 25rem; /* Decrease height */
+  margin-top: 3rem; /* Add margin to move it downward */
+  position: relative;
+  padding: 1rem; /* Adjust padding if needed */
+  border: 5px solid #fd077a; /* Warm golden border */
+  box-shadow: 
+    -4px -4px 10px rgba(0, 153, 204, 0.4), /* Soft outer shadow with a cool cyan tone */
+    inset 4px 4px 10px rgba(255, 102, 102, 0.5), /* Warm coral inner shadow */
+    inset -4px -4px 10px rgba(80, 80, 80, 0.5), /* Neutral inner shadow */
+    4px 4px 10px rgba(0, 255, 153, 0.4), /* Vibrant green outer glow */
+    inset 0 0 0 2px #f2f2f2; /* Light gray inner border for a soft contrast */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Ensure that clock hands are positioned relative to this container */
+  animation: glowing 2s ease-in-out infinite; /* Animation for glowing effect */
+}
+
+/* Keyframes for glowing animation */
+@keyframes glowing {
+  0% {
+    box-shadow: 
+      0 0 15px rgba(255, 0, 0, 0.7), 
+      inset 0 0 10px rgba(255, 215, 0, 0.5),
+      inset 0 0 20px rgba(255, 0, 0, 0.3),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(255, 0, 0, 1), 
+      inset 0 0 20px rgba(255, 215, 0, 0.8),
+      inset 0 0 30px rgba(255, 0, 0, 0.5),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+  100% {
+    box-shadow: 
+      0 0 15px rgba(255, 0, 0, 0.7), 
+      inset 0 0 10px rgba(255, 215, 0, 0.5),
+      inset 0 0 20px rgba(255, 0, 0, 0.3),
+      inset 0 0 0 2px white; /* Maintain white inner border */
+  }
+}
+
+.outer-clock-face {
+  position: relative;
+  background: #282828;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  z-index: 1; /* Make sure it's beneath the hands */
+}
+
+.outer-clock-face::after {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.outer-clock-face::after,
+.outer-clock-face::before,
+.outer-clock-face .marking {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  background: #1df52f;
+  z-index: 0; /* Ensure markings are beneath hands */
+  left: 49%;
+}
+
+.outer-clock-face .marking {
+  background: #bdbdcb;
+  width: 3px;
+}
+
+.outer-clock-face .marking.marking-one {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.outer-clock-face .marking.marking-two {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.outer-clock-face .marking.marking-three {
+  -webkit-transform: rotate(120deg);
+  -moz-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.outer-clock-face .marking.marking-four {
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+
+.inner-clock-face {
+  position: absolute;
+  top: 10%; /* Positioning the inner clock face slightly down */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  width: 80%;
+  height: 80%;
+  background: #282828;
+  border-radius: 50%;
+  z-index: 2; /* Above outer clock face */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px; /* Space between boxes */
+  animation: pulse 3s ease-in-out infinite; /* Pulsating animation */
+}
+
+/* Keyframes for pulsating animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0.3); /* Initial state without glow */
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Midpoint with glowing effect */
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0.3); /* Back to initial state */
+  }
+}
+
+
+
+/* ------------------- Light Mode Styles ------------------- */
+
+.light-mode .time {
+  color: #ffffff; /* White color for time */
+  text-shadow: 0 0 25px rgba(255, 255, 0, 0.9); /* Yellow glow effect for added emphasis */
+  animation: shine-effect 2s linear infinite; /* Shine effect animation for time display */
+}
+
+.light-mode .date-box,
+.light-mode .day-of-week-box,
+.light-mode .time-of-day-box {
+  color: #ffffff; /* White text */
+  background-color: #000000; /* Black background */
+  border-radius: 12px; /* Rounded corners */
+  padding: 6px 12px; /* Padding adjustment */
+  text-shadow: 0 0 12px rgba(255, 255, 0, 0.9); /* Yellow shadow effect for a glowing look */
+  transition: background-color 1s ease, transform 0.5s ease;
+}
+
+.light-mode .date-box:hover,
+.light-mode .day-of-week-box:hover,
+.light-mode .time-of-day-box:hover {
+  background-color: #8B0000; /* Dark red on hover */
+  transform: scale(1.1); /* Slightly stronger scale-up effect */
+  box-shadow: 0 0 20px rgba(255, 255, 0, 0.7); /* Yellow glow effect on hover */
+}
+
+/* ------------------- Dark Mode Styles ------------------- */
+
+.dark-mode .time {
+  color: #ffffff; /* White color for time */
+  text-shadow: 0 0 25px rgba(255, 215, 0, 0.9); /* Yellow glow effect */
+  animation: shine-effect 2s linear infinite; /* Shine effect */
+}
+
+.dark-mode .date-box,
+.dark-mode .day-of-week-box,
+.dark-mode .time-of-day-box {
+  background-color: #3d3d3d; /* Dark gray background */
+  color: #ffffff; /* White text */
+  padding: 6px 12px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  animation: colorChange 5s infinite; /* Background color change animation */
+}
+
+.dark-mode .date-box:hover,
+.dark-mode .day-of-week-box:hover,
+.dark-mode .time-of-day-box:hover {
+  background-color: #555555; /* Lighter gray on hover */
+  transform: scale(1.1); /* Scale effect */
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.7); /* Silver glow effect */
+}
+
+/* Common Keyframes for Hover Animation */
+@keyframes colorChange {
+  0% { background: #3d3d3d; }
+  50% { background: #555555; }
+  100% { background: #3d3d3d; }
+}
+
+/* ------------------- Common Time Styles ------------------- */
+
+.time {
+  position: absolute;
+  top: 30%; /* Fix position at top 30% */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 5px;
+  background: transparent; /* No background for the stopwatch */
+  z-index: 1; /* Ensure it appears below the clock hands */
+}
+
+.time span {
+  width: 25px; /* Adjust width to fit inside clock */
+  text-align: center;
+  font-size: 20px; /* Adjust font size */
+  font-weight: 500;
+  border-radius: 15px;
+  margin: 0 3px;
+}
+
+.time span.colon {
+  width: 8px; /* Adjust width to fit inside clock */
+  font-size: 16px;
+}
+
+.time span.ms-colon,
+.time span.millisecond {
+  color: #e8862a; /* Orange color for milliseconds and colon */
+}
+
+/* Hand Styles */
+.hand {
+  width: 50%;
+  right: 50%;
+  height: 4px;
+  background: #61afff; /* Blue color for generic hands */
+  position: absolute;
+  top: 50%;
+  border-radius: 6px;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  z-index: 4; /* Higher than the stopwatch display */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+/* Hour Hand */
+.hand.hour-hand {
+  width: 30%;
+  background: #ffca28; /* Yellow color for hour hand */
+  z-index: 5; /* Ensure hour hand is above minute and second hands */
+  box-shadow: 0 0 12px rgba(255, 202, 40, 0.8); /* Glowing yellow effect */
+}
+
+/* Minute Hand */
+.hand.min-hand {
+  height: 3px;
+  background: #4caf50; /* Green color for minute hand */
+  width: 40%;
+  z-index: 6; /* Ensure minute hand is above second hand */
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.8); /* Glowing green effect */
+}
+
+/* Second Hand */
+.hand.second-hand {
+  background: #ee791a; /* Orange color for second hand */
+  width: 45%;
+  height: 2px;
+  z-index: 7; /* Ensure second hand is the topmost */
+  box-shadow: 0 0 12px rgba(238, 121, 26, 0.8); /* Glowing orange effect */
+}
+
+
+.buttons {
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
+  left: -8%; /* Positioning remains unchanged */
+}
+
+.buttons button {
+  padding: 12px 24px; /* Slightly larger padding for better touch experience */
+  outline: none;
+  border: none;
+  margin: 0 6px;
+  color: #fff;
+  background: linear-gradient(145deg, #56ab2f, #a8e063); /* Subtle gradient green background */
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  animation: pulse-animation 2s ease-in-out infinite;
+}
+
+/* Hover and focus effects */
+.buttons button:hover,
+.buttons button:focus {
+  background: linear-gradient(145deg, #4CAF50, #66ff99); /* Slightly different green gradient on hover */
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3); /* Subtle glowing effect */
+  transform: scale(1.08); /* Increased scale on hover */
+  animation: none; /* Pause pulse effect on hover */
+}
+
+/* Active and disabled button states */
+.buttons button.active,
+.buttons button.stopActive {
+  pointer-events: none;
+  opacity: 0.6;
+  background: #a8a8a8; /* Softer gray for inactive state */
+  box-shadow: none; /* Remove shadow for inactive state */
+  animation: none; /* Remove pulse effect when inactive */
+}
+
+/* Pulse animation */
+@keyframes pulse-animation {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.6); /* Soft green pulse */
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8); /* Stronger green glow at midpoint */
+  }
+}
+
+/* Glow effect animation */
+@keyframes glow-effect {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+  }
+}
+
+
+
+
+.lap-container {
+  max-height: 150px;
+  overflow-y: auto;
+  width: 250px;
+  padding: 10px;
+  background: linear-gradient(135deg, #3c3c3c, #1f1f1f); /* Darker gradient for a sleek look */
+  border-radius: 8px; /* Slightly more rounded corners */
+  margin-bottom: 20px;
+  color: #ff4081; /* Vibrant pink text for contrast */
+  border: 1px solid #e0e0e0; /* Softer border */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Stronger shadow for depth */
+  position: relative;
+  left: 20px;
+  animation: slide-in 0.8s ease-out, pulse-glow 3s ease-in-out infinite; /* Added subtle pulse glow */
+}
+
+/* Pulse glow animation for the container */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5); /* Pink glow */
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 64, 129, 1); /* More intense glow */
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5); /* Back to subtle glow */
+  }
+}
+
+.lap-item {
+  background: linear-gradient(135deg, #515151, #333); /* Subtle gradient for lap items */
+  margin-bottom: 6px;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+  color: #ffffff;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  animation: fade-in 0.7s ease-out, lift-effect 2s ease-in-out infinite; /* Added a lifting effect for more depth */
+}
+
+.lap-item:hover {
+  background: #626262; /* Slightly lighter gray on hover */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Enhanced white glow effect */
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-30px); /* More exaggerated slide */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+/* Common Styles for Quote Box */
+.quote-box {
+  width: 250px;
+  height: 100px;
+  border-radius: 8px; /* Slightly more rounded corners */
+  padding: 15px;
+  color: #f1c40f; /* Bright yellow text for contrast */
+  border: 1px solid #f1c40f; /* Yellow border */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
+  overflow: hidden;
+  position: relative;
+  left: 20px;
+  animation: slide-in 0.8s ease-out, glow-effect 3s ease-in-out infinite; /* Added glow effect */
+}
+
+/* Light Mode Quote Box */
+.light-mode .quote-box {
+  background: linear-gradient(135deg, #ffffff, #ffffff); /* Lighter gradient for light mode */
+  color: #000000; /* Bright yellow text for contrast */
+  border: 1px solid #000000; /* Yellow border */
+  box-shadow: 0 6px 15px rgba(1, 255, 213, 0.7); /* Stronger shadow for depth */
+}
+
+/* Dark Mode Quote Box */
+.dark-mode .quote-box {
+  background: linear-gradient(135deg, #2c2c2c, #1f1f1f); /* Darker gradient for dark mode */
+  color: #f1c40f; /* Bright yellow text for contrast */
+  border: 1px solid #f1c40f; /* Yellow border */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Stronger shadow for depth */
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5); /* Pink glow */
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 64, 129, 1); /* More intense glow */
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5); /* Back to subtle glow */
+  }
+}
+
+/* Slide-In Animation */
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Glow Effect Animation */
+@keyframes glow-effect {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 64, 129, 0.5); /* Subtle glow */
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 64, 129, 1); /* Intense glow */
+  }
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  line-height: 1.5;
+  text-align: center;
+  font-size: 16px; /* Slightly larger font size for better readability */
+  animation: fadeIn 3s ease-in-out, bounce-effect 2s ease-in-out infinite; /* Added bounce effect */
+}
+
+/* Bounce Effect Animation */
+@keyframes bounce-effect {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px); /* Bounce up */
+  }
+  60% {
+    transform: translateY(-5px); /* Bounce down */
+  }
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Add this CSS to your styles.css file */
+
+.time-of-day-box {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.5em;
+    color: #333;
+    font-weight: bold;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.morning {
+    background-color: #FFD700;
+    box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+              inset 4px 4px 10px rgba(252, 1, 1, 0.5),
+              inset -4px -4px 10px rgba(67,67,67,0.5),
+              4px 4px 10px rgba(1, 126, 243, 0.3);
+    color: #FF6347;
+}
+
+.afternoon {
+    background-color: #FF4500;
+    box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+              inset 4px 4px 10px rgba(249, 253, 2, 0.5),
+              inset -4px -4px 10px rgba(67,67,67,0.5),
+              4px 4px 10px rgba(1, 243, 61, 0.3);
+    color: #FFD700;
+}
+
+.evening {
+    background-color: #1E90FF;
+    box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+              inset 4px 4px 10px rgba(101, 91, 240, 0.5),
+              inset -4px -4px 10px rgba(67,67,67,0.5),
+              4px 4px 10px rgba(215, 1, 243, 0.3);
+    color: #FFFFFF;
+}
+
+.night {
+    background-color: #000080;
+    box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+              inset 4px 4px 10px rgba(90, 2, 2, 0.5),
+              inset -4px -4px 10px rgba(67,67,67,0.5),
+              4px 4px 10px rgba(243, 1, 82, 0.3);
+    color: #F0E68C;
+}
+
+
+/* Common Styles for Popup Message */
+.popup-message {
+  display: none;
+  position: fixed;
+  top: 45%;
+  left: 79.5%;
+  transform: translate(-50%, -50%) translateY(30px); /* Initial position for slide-up effect */
+  border-radius: 8px; /* Slightly more rounded corners */
+  padding: 15px; /* Reduced padding for a shorter box */
+  width: 250px; /* Fixed width for consistency */
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+  text-align: center; /* Center the text and button */
+  opacity: 0; /* Initial opacity for fade-in effect */
+  animation: fadeInUp 0.6s ease-out forwards, scaleUp 0.6s ease-out forwards; /* Apply the animations */
+}
+
+.popup-message p {
+  margin: 0 0 10px; /* Reduced margin for a shorter box */
+}
+
+/* Light Mode Styles */
+.light-mode .popup-message {
+  background: #f9f9f9; /* Light gray background for subtle contrast */
+  color: #333;
+  border: 1px solid #ddd; /* Light border */
+}
+
+.light-mode .popup-message button {
+  background: #007bff;
+  border: none;
+  color: #fff;
+  padding: 8px 16px; /* Adjusted padding for a better fit */
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block; /* Ensure the button is treated as an inline element for centering */
+  margin-top: 10px; /* Margin to provide space between text and button */
+  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.light-mode .popup-message button:hover {
+  background: #0056b3;
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Dark Mode Styles */
+.dark-mode .popup-message {
+  background: #1c1c1c; /* Darker background for contrast */
+  color: #f1f1f1;
+  border: 1px solid #444; /* Darker border */
+}
+
+.dark-mode .popup-message button {
+  background: #1e90ff;
+  border: none;
+  color: #fff;
+  padding: 8px 16px; /* Adjusted padding for a better fit */
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block; /* Ensure the button is treated as an inline element for centering */
+  margin-top: 10px; /* Margin to provide space between text and button */
+  transition: background 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.dark-mode .popup-message button:hover {
+  background: #1c86ee;
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Keyframes for fade-in and slide-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(30px); /* Initial position */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0); /* Final position */
+  }
+}
+
+/* Keyframes for scale-up animation */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* General styling for the theme toggle button */
+#themeToggleBtn {
+  background: linear-gradient(135deg, #007BFF, #0056b3); /* Gradient background */
+  color: white;
+  position: fixed; /* Ensure the button stays in place */
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  left: 20px; /* Position the button on the left side */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase; /* Uppercase text for emphasis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+
+/* Hover state styling */
+#themeToggleBtn:hover {
+  background: linear-gradient(135deg, #0056b3, #003d7a); /* Darker gradient on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Active state styling */
+#themeToggleBtn:active {
+  background: linear-gradient(135deg, #003d7a, #002b54); /* Even darker gradient on click */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow reduces on click */
+  transform: scale(0.98); /* Slightly smaller on click */
+}
+
+/* General styling for trigger box */
+.trigger-box {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.trigger-box:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Styling for alarm box */
+.alarm-box {
+  width: 250px;
+  padding: 15px;
+  background-color: #333; /* Dark background for better visibility in dark mode */
+  color: #f5f5f5; /* Light text color for contrast */
+  border-radius: 12px;
+  border: 2px solid #007BFF;
+  position: fixed;
+  bottom: -150%;
+  right: 20px;
+  opacity: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s ease;
+  transform-origin: bottom right;
+  animation: slideInFromBottom 0.7s ease-out; /* Add animation */
+}
+
+/* Alarm Box Animations */
+.alarm-box.show {
+  bottom: 80px;
+  opacity: 1;
+  transform: rotateX(0deg) scale(1.1);
+}
+
+/* Reminder Select Box */
+.reminder-select {
+  padding: 6px;
+  margin: 10px 0;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #007BFF;
+  background-color: #1e1e1e; /* Dark background for better visibility in dark mode */
+  color: #e5e5e5; /* Light text color */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.reminder-select:focus {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Close button inside alarm box */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 22px;
+  color: #ff5e5e;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(360deg);
+  color: #ff0000;
+}
+
+/* Button styling */
+button {
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Alarm box content styling */
+.alarm-box h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #007BFF;
+  text-align: center;
+}
+
+/* Input and Button inside Alarm Box */
+.alarm-box input, .alarm-box button {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  border: 1px solid #f1ce08e7;
+  border-radius: 5%;
+  box-shadow: 0 6px 12px rgba(247, 91, 0, 0.63); /* Elegant shadow for depth */
+}
+
+.alarm-box input:focus, .alarm-box button:focus {
+  border-color: #0056b3;
+  transform: scale(1.02);
+  
+}
+
+/* List styling */
+.alarm-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.alarm-box li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #444; /* Darker border for dark mode */
+  
+}
+
+/* Stop Alarm Button */
+#stopAlarmBtn {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  border-radius: 1px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  border: 1px solid #f8f8f8e7;
+  border-radius: 5%;
+  box-shadow: 0 6px 12px rgba(247, 0, 41, 0.603); /* Elegant shadow for depth */
+}
+
+#stopAlarmBtn:hover {
+  background-color: #e67e22;
+  transform: scale(1.05);
+}
+
+/* General button styles within .alarm-box */
+.alarm-box li button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.alarm-box li button:hover {
+  transform: scale(1.1);
+  background-color: #d9534f;
+}
+
+/* Specific styling for delete button */
+.alarm-box li .delete-btn {
+  background-color: transparent; /* Override background */
+  color: inherit; /* Use inherited text color */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Increase font size for larger emoji */
+  border-radius: 50%; /* Make button round */
+  width: 30px; /* Increased width */
+  height: 30px; /* Increased height */
+  overflow: hidden; /* Ensure no overflow */
+  position: relative; /* Position relative for absolute positioning of cap */
+  transition: transform 0.3s ease; /* Transition for hover effect */
+}
+
+/* Create the cap using pseudo-element */
+.alarm-box li .delete-btn::before {
+  content: "_";
+  position: absolute;
+  bottom: 15px; /* Adjust position to align with the emoji */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px; /* Increase size for more prominence */
+  font-weight: bold; /* Make the cap thicker */
+  color: rgb(255, 255, 255); /* Set cap color */
+  padding: 10 10px; /* Increase padding for a thicker appearance */
+  border: 1px solid rgba(243, 243, 243, 0.178); /* Black border for thickness */
+  border-radius: 12px; /* Rounded corners */
+  transition: transform 0.3s ease; /* Transition for hover effect */
+}
+
+/* Adjust cap position on hover */
+.alarm-box li .delete-btn:hover::before {
+  transform: translateX(-50%) translateY(-6px); /* Adjust cap movement on hover */
+}
+
+/* Remove default button text styles if any */
+.delete-btn::after {
+  content: none; /* Ensure no additional content is added */
+}
+
+/* Animation for alarm box */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Label */
+/* Styling for the clock label */
+.clock-label {
+  position: absolute; /* Position it relative to the clock container */
+  top: 160px; /* Position it at the top */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  font-size: 30px; /* Increase font size for better visibility */
+  font-weight: bold; /* Make the text bold */
+  color: #fff; /* White color for the text */
+  padding: 8px 12px; /* Padding around the text */
+  border-radius: 12px; /* Rounded corners */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7), 0 0 25px rgba(186, 188, 190, 0.699); /* Glow effect */
+  background: linear-gradient(120deg, #eba1ba, #ffffff, #ee3c80, #e97a9b); /* Soft, romantic gradient */
+  background-clip: text; /* Clip background to text */
+  -webkit-background-clip: text; /* For WebKit browsers */
+  color: transparent; /* Hide default text color */
+  animation: sparkle 4s linear infinite; /* Add sparkling animation */
+  text-align: center; /* Center text */
+  z-index: 1; /* Ensure it is on top */
+}
+
+/* Sparkle animation for the text */
+@keyframes sparkle {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

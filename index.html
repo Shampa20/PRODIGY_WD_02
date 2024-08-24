@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch Timer with Clock</title>
+    <link rel="stylesheet" href="riya.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="clock-container">
+            <div class="clock">
+                
+                <div class="outer-clock-face">
+                    <div class="marking marking-one"></div>
+                    <div class="marking marking-two"></div>
+                    <div class="marking marking-three"></div>
+                    <div class="marking marking-four"></div>
+                    <div class="inner-clock-face">
+                        <div class="date-box">
+                            <span class="day"></span>
+                        </div>
+                        <div class="date-box">
+                            <span class="month"></span>
+                        </div>
+                        <div class="pin"></div>
+                        <div class="date-box">
+                            <span class="year"></span>
+                        </div>
+                        <div class="day-of-week-box">
+                            <span class="day-of-week"></span>
+                        </div>
+                        <div class="hand hour-hand"></div>
+                        <div class="hand min-hand"></div>
+                        <div class="hand second-hand"></div>
+                        <div class="time-of-day-box">
+                            <span class="time-of-day"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="time">
+                    <span class="hour">00</span>
+                    <span class="colon">:</span>
+                    <span class="minute">00</span>
+                    <span class="colon">:</span>
+                    <span class="second">00</span>
+                    <span class="colon ms-colon">:</span>
+                    <span class="millisecond">00</span>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="lap-container"></div>
+                <div class="quote-box"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="start">Start</button>
+            <button class="pause">Pause</button>
+            <button class="reset">Reset</button>
+            <button class="lap">Lap</button>
+        </div>
+    </div>
+    <!-- Trigger Box for Alarm Popup -->
+    <div id="alarmTriggerBox" class="trigger-box">Alarm</div>
+
+    <!-- Alarm Box Popup -->
+    <div id="alarmBox" class="alarm-box">
+        <span id="closeAlarmBox" class="close-btn">&times;</span>
+        <h3>Set Alarms</h3>
+        <!-- Input for alarm time -->
+        <input type="time" id="alarmTime">
+        
+        <!-- Reminder Selector -->
+        <label for="reminderSelect">Select Reminder:</label>
+        <select id="reminderSelect" class="reminder-select">
+            <option value="none">No Reminder</option>
+            <option value="5">5 Min</option>
+            <option value="10">10 Min</option>
+            <option value="15">15 Min</option>
+            <option value="20">20 Min</option>
+            <option value="25">25 Min</option>
+            <option value="30">30 Min</option>
+            <option value="35">35 Min</option>
+            <option value="40">40 Min</option>
+            <option value="45">45 Min</option>
+            <option value="50">50 Min</option>
+            <option value="55">55 Min</option>
+            <option value="60">60 Min</option>
+        </select>
+        
+        <button id="setAlarmBtn">Set Alarm</button>
+        
+        <ul id="alarmList">
+            <li>
+                Alarm 1 
+                <button class="delete-btn" onclick="deleteAlarm(0)">
+                    <span class="dustbin-emoji">🗑️</span>
+                </button>                                  
+            </li>         
+            <!-- More alarms will be dynamically added here -->
+        </ul>
+        <button id="stopAlarmBtn">Stop Alarm</button>
+    </div>
+    <!-- Custom Popup Message -->
+    <div id="popupMessage" class="popup-message">
+        <p id="popupText">Already Active, Please select another time</p>
+        <button id="closePopup">OK</button>
+    </div>
+        <button id="themeToggleBtn">Toggle Theme</button>
+        <audio id="alarmSound" src="alarm.mp3"></audio>
+        <button id="stopAlarmBtn" style="display:none;">Stop Alarm</button>
+        <script src="riya.js"></script>
+    </body>
+</html>
